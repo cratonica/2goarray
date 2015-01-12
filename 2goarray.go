@@ -13,7 +13,7 @@ import (
 
 func main() {
 	if len(os.Args) != 3 {
-		fmt.Println("Usage: 2gorray array_name package_name")
+		fmt.Println("Usage: 2goarray array_name package_name")
 		return
 	}
 
