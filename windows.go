@@ -2,6 +2,6 @@
 
 package main
 
-func isTerminal() bool{
-    return false
+func isTerminal() bool {
+	return false
 }
