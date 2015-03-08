@@ -6,9 +6,10 @@ Having [set up your Go environment](http://golang.org/doc/install), simply run
 
     go get github.com/cratonica/2goarray
 
-Then use by piping a file into the utility and capturing the output. You must provide a name for the generated slice symbol and package name. For example:
+Then use by piping a file into the utility and capturing the output.
+You must provide a name for the generated slice symbol and package name. For example:
 
-    $GOPATH/bin/2gorray MyArray mypackage < myimage.png > myimage.go
+    $GOPATH/bin/2gorray -p mypackage -a MyArray < myimage.png > myimage.go
 
 This will output something like:
 
