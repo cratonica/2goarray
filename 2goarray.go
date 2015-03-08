@@ -29,12 +29,12 @@ func main() {
 	app.Usage = "A simple utility to encode a file into a Go byte array"
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
-			Name:  "package, p",
+			Name:  "package-name, p",
 			Value: "main",
 			Usage: "name of the package",
 		},
 		cli.StringFlag{
-			Name:  "array, a",
+			Name:  "array-name, a",
 			Value: "DATA",
 			Usage: "name of the byte array",
 		},
@@ -54,10 +54,10 @@ func main() {
 		}
 
 		// get the cli flags
-		packageName := c.String("package")
-		arrayName := c.String("array")
+		packageName := c.String("package-name")
+		arrayName := c.String("array-name")
 		noGeneratedInfo := c.Bool("no-generated-info")
-		noPackage := c.Bool("no-no-package")
+		noPackage := c.Bool("no-package")
 
 		// print out the code
 		if !noGeneratedInfo {
