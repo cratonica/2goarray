@@ -5,5 +5,8 @@ go:
   - 1.5
   - tip
 
+install:
+  - go get
+
 script:
   - make test
