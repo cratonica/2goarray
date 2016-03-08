@@ -1,10 +1,11 @@
 build:
 	@go build
-	@./2goarray --version
 
 test:
-	@go test
 	@make build
+	@rm -f fixture/sample.go
+	@./2goarray < fixture/sample.txt > fixture/sample.go
+	@go test ./fixture
 
 clean:
-	go clean
+	@go clean
