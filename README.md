@@ -1,4 +1,4 @@
-2goarray
+2goarray [![Build Status](https://travis-ci.org/paulvollmer/2goarray.svg?branch=master)](https://travis-ci.org/paulvollmer/2goarray)
 ========
 A simple utility to encode a file (or any other data) into a Go byte slice.
 
