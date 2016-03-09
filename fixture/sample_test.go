@@ -1,14 +1,21 @@
+//go:generate ../2goarray --input sample.txt --output --array-name Hello hello.go
+
 package main
 
 import "testing"
 
 func Test_Sample(t *testing.T) {
-	if DATA == nil {
-		t.Error("DATA nil")
+	testData(t, DATA)
+	testData(t, Hello)
+}
+
+func testData(t *testing.T, d []byte) {
+	if d == nil {
+		t.Error("data nil")
 		return
 	}
-	dataStr := string(DATA)
+	dataStr := string(d)
 	if dataStr != "hello world\n" {
-		t.Error("DATA not equal")
+		t.Error("data not equal")
 	}
 }
