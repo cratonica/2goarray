@@ -29,6 +29,16 @@ func main() {
 	app.Usage = "A simple utility to encode a file into a Go byte array"
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
+			Name:  "input, i",
+			Value: "",
+			Usage: "path to the input json file",
+		},
+		cli.StringFlag{
+			Name:  "output, o",
+			Value: "",
+			Usage: "filepath to write to the generated source",
+		},
+		cli.StringFlag{
 			Name:  "package-name, p",
 			Value: "main",
 			Usage: "name of the package",
