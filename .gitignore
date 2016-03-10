@@ -22,3 +22,4 @@ _testmain.go
 *.exe
 2goarray
 fixture/sample.go
+fixture/hello.go

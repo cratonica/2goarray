@@ -1,4 +1,4 @@
-//go:generate ../2goarray --input sample.txt --output --array-name Hello hello.go
+//go:generate ../2goarray --input sample.txt --output hello.go
 
 package main
 
@@ -6,7 +6,7 @@ import "testing"
 
 func Test_Sample(t *testing.T) {
 	testData(t, DATA)
-	testData(t, Hello)
+	testData(t, Sample)
 }
 
 func testData(t *testing.T, d []byte) {
