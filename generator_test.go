@@ -23,3 +23,22 @@ func Test_GenerateCode(t *testing.T) {
 		t.Error("generated code not equal")
 	}
 }
+
+func Test_FilepathToStructName(t *testing.T) {
+	var structNameTests = []struct {
+		in  string
+		out string
+	}{
+		{"foo", "Foo"},
+		{"foo.txt", "Foo"},
+		{"path/to/foo.txt", "Foo"},
+		{"path/to/foo bar.txt", "Foo_bar"},
+		{"path/to/foo-bar.txt", "Foo_bar"},
+		{"path/to/foo.bar.txt", "Foo_bar"},
+	}
+	for _, tt := range structNameTests {
+		if FilepathToStructName(tt.in) != tt.out {
+			t.Errorf("FilepathToStructName '%s' not equal to '%s'\n", tt.in, tt.out)
+		}
+	}
+}
