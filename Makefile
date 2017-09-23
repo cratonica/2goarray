@@ -14,7 +14,8 @@ test-cli: clean build
 	@go generate ./fixture/sample_files
 	@go run ./fixture/sample_files/*.go
 
-
 clean:
 	@go clean
 	@rm -f fixture/sample.go
+	@rm -f fixture/hello.go
+	@rm -f fixture/sample_files/data.go
