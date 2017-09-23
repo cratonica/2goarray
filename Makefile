@@ -1,10 +1,8 @@
 build:
 	@go build
-	@./2goarray --version
 
-test:
-	@go test -v
-	@make build
+test: build
+	@./2gobytes --version
 
 clean:
-	go clean
+	@go clean

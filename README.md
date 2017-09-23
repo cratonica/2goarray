@@ -1,15 +1,15 @@
-2goarray [![Build Status](https://travis-ci.org/paulvollmer/2goarray.svg?branch=master)](https://travis-ci.org/paulvollmer/2goarray)
-========
+# 2gobytes [![Build Status](https://travis-ci.org/paulvollmer/2gobytes.svg?branch=master)](https://travis-ci.org/paulvollmer/2gobytes)
+
 A simple utility to encode a file (or any other data) into a Go byte slice.
 
 Having [set up your Go environment](http://golang.org/doc/install), simply run
 
-    go get github.com/cratonica/2goarray
+    go get github.com/paulvollmer/2gobytes
 
 Then use by piping a file into the utility and capturing the output.
 You must provide a name for the generated slice symbol and package name. For example:
 
-    $GOPATH/bin/2gorray -p mypackage -a MyArray < myimage.png > myimage.go
+    $GOPATH/bin/2gobytes -p mypackage -a MyArray < myimage.png > myimage.go
 
 This will output something like:
 
