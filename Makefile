@@ -3,14 +3,17 @@ build:
 
 test: test-src test-cli
 
-test-cli: build
+test-src:
+	@go test -v -cover ./generator
+
+test-cli: clean build
 	@rm -f fixture/sample.go
-	@./2goarray < fixture/sample.txt > fixture/sample.go
+	@./2gobytes < fixture/sample.txt > fixture/sample.go
 	@go generate ./fixture
 	@go test ./fixture -v
+	@go generate ./fixture/sample_files
+	@go run ./fixture/sample_files/*.go
 
-test-src:
-	@go test -v -cover
 
 clean:
 	@go clean

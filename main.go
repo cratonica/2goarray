@@ -1,47 +1,47 @@
 // Simple utility to convert a file into a Go byte array
 
 // Clint Caywood
+// Paul Vollmer
 
-// http://github.com/cratonica/2goarray
+// http://github.com/paulvollmer/2gobytes
 package main
 
 import (
 	"bufio"
 	"fmt"
-	"github.com/codegangsta/cli"
 	"io"
 	"io/ioutil"
 	"os"
-)
 
-const (
-	NAME    = "2goarray"
-	VERSION = "0.3.0"
-	URL     = "http://github.com/cratonica/2goarray"
+	"github.com/codegangsta/cli"
+	"github.com/paulvollmer/2gobytes/generator"
 )
 
 func main() {
 	// the commandline interface
 	app := cli.NewApp()
-	app.Name = NAME
-	app.Version = VERSION
-	app.Author = NAME + " contributors"
-	app.Email = URL + "/graphs/contributors"
+	app.Name = generator.Name
+	app.Version = generator.Version
+	app.Author = generator.Name + " contributors"
+	app.Email = generator.URL + "/graphs/contributors"
 	app.Usage = "A simple utility to encode a file into a Go byte array"
 	app.Flags = []cli.Flag{
-		cli.StringFlag{
+		cli.StringSliceFlag{
 			Name:  "input, i",
-			Value: "",
 			Usage: "path to the input json file",
 		},
 		cli.StringFlag{
 			Name:  "output, o",
-			Value: "",
 			Usage: "filepath to write to the generated source",
+		},
+		cli.Uint64Flag{
+			Name:  "perm, P",
+			Value: 0644,
+			Usage: "file permission of the generated source",
 		},
 		cli.StringFlag{
 			Name:  "package-name, p",
-			Value: "",
+			Value: "main",
 			Usage: "name of the package",
 		},
 		cli.StringFlag{
@@ -65,37 +65,36 @@ func main() {
 func cliAction(c *cli.Context) {
 	// create generator object.
 	// here we store the generator parameter
-	code := NewGenerator()
+	code := generator.NewGenerator()
 
 	// get the cli flag values
-	input := c.String("input")
+	input := c.StringSlice("input")
 	output := c.String("output")
+	perm := c.Uint64("perm")
 	code.PackageName = c.String("package-name")
-	code.VarName = c.String("array-name")
+	varName := c.String("array-name")
 	code.GenerateInfo = !c.Bool("no-generated-info")
 	code.GeneratePackage = !c.Bool("no-package")
 
 	// check if the input flag was set
-	if input != "" {
-		// read the input file
-		code.SetDataFromFile(input)
+	if len(input) != 0 {
+		for i := 0; i < len(input); i++ {
+			// read the input file
+			code.AddFile(input[i])
+		}
 	} else {
 		// read the input from stdin
 		if isTerminal() {
-			fmt.Println("\nPlease pipe the file you wish to encode into stdin or use the -input flag\n")
+			fmt.Print("\nPlease pipe the file you wish to encode into stdin or use the -input flag\n\n")
 			os.Exit(1)
 		}
 		reader := bufio.NewReader(os.Stdin)
 		text, err := reader.ReadString('\n')
 		if err != nil && err != io.EOF {
-			fmt.Errorf("Error: %v", err)
+			fmt.Printf("Error: %v\n", err)
 			os.Exit(1)
 		}
-		code.SetData([]byte(text))
-	}
-
-	if code.VarName == "" {
-		code.VarName = "DATA"
+		code.AddData(varName, []byte(text))
 	}
 
 	// generate the code
@@ -104,7 +103,7 @@ func cliAction(c *cli.Context) {
 	// write or print generated code
 	if output != "" {
 		fmt.Println("OK, write to file", output)
-		ioutil.WriteFile(output, genCode, 0755)
+		ioutil.WriteFile(output, genCode, os.FileMode(perm))
 		os.Exit(0)
 	}
 	fmt.Print(string(genCode))

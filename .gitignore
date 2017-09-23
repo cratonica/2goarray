@@ -20,6 +20,6 @@ _cgo_export.*
 _testmain.go
 
 *.exe
-2goarray
+2gobytes
 fixture/sample.go
 fixture/hello.go
