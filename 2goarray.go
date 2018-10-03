@@ -32,7 +32,7 @@ func main() {
 
 	fmt.Println(GENERATED_BY + "\n")
 	fmt.Printf("package %s\n\n", os.Args[2])
-	fmt.Printf("var %s []byte = []byte {", os.Args[1])
+	fmt.Printf("var %s []byte = []byte{", os.Args[1])
 	buf := make([]byte, 1)
 	var err error
 	var totalBytes uint64
