@@ -10,6 +10,15 @@ Then use by piping a file into the utility and capturing the output. You must pr
 
     $GOPATH/bin/2goarray MyArray mypackage < myimage.png > myimage.go
 
+Or in PowerShell, to loop over a folder of icons and output a .go file corresponding to the icon's name:
+
+```powershell
+$2goarray = Join-Path $Env:GOPATH '\bin\2goarray.exe'
+Get-ChildItem *.ico | Foreach-Object {
+  Get-Content $_.FullName | Invoke-Expression $2goarray $_.BaseName "mypackage" | Out-File -FilePath $($_.BaseName + ".go") -Encoding utf8
+}
+```
+
 This will output something like:
 
     package mypackage
