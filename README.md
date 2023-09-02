@@ -3,8 +3,13 @@
 A simple utility to encode a file (or any other data) into a Go byte slice.
 
 Having [set up your Go environment](http://golang.org/doc/install), simply run
+the command below [if you are using Go under 1.17](https://go.dev/doc/go-get-install-deprecation):
 
     go get github.com/cratonica/2goarray
+
+Otherwise:
+
+    go install github.com/cratonica/2goarray
 
 Then use by piping a file into the utility and capturing the output. You must provide a name for the generated slice symbol and package name. For example:
 
@@ -26,3 +31,4 @@ This will output something like:
 ## Contributors
 - [Clint Caywood](https://github.com/cratonica)
 - [Paul Vollmer](https://github.com/paulvollmer)
+- [DevDengChao](https://github.com/DevDengChao)
